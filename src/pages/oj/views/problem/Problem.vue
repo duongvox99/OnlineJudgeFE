@@ -2,7 +2,12 @@
   <div class="flex-container">
     <div id="problem-main">
       <!--problem main-->
+
       <Panel :padding="40" shadow>
+        <ul class="tab-menu">
+          <li class="tab active">hehe</li>
+          <li class="tab">hoho</li>
+        </ul>
         <div slot="title">{{problem.title}}</div>
         <div id="problem-content" class="markdown-body" v-katex>
           <p class="title">{{$t('m.Description')}}</p>
@@ -19,9 +24,9 @@
               <div class="sample-input">
                 <p class="title">{{$t('m.Sample_Input')}} {{index + 1}}
                   <a class="copy"
-                     v-clipboard:copy="sample.input"
-                     v-clipboard:success="onCopy"
-                     v-clipboard:error="onCopyError">
+                    v-clipboard:copy="sample.input"
+                    v-clipboard:success="onCopy"
+                    v-clipboard:error="onCopyError">
                     <Icon type="clipboard"></Icon>
                   </a>
                 </p>
@@ -54,6 +59,7 @@
                     :languages="problem.languages"
                     :language="language"
                     :theme="theme"
+                    :style="{ height: '400px', 'overflow-y': 'scroll' }"
                     @resetCode="onResetToTemplate"
                     @changeTheme="onChangeTheme"
                     @changeLang="onChangeLang"></CodeMirror>
@@ -101,7 +107,7 @@
       </Card>
     </div>
 
-    <div id="right-column">
+    <!-- <div id="right-column">
       <VerticalMenu @on-click="handleRoute">
         <template v-if="this.contestID">
           <VerticalMenu-item :route="{name: 'contest-problem-list', params: {contestID: contestID}}">
@@ -186,7 +192,7 @@
           <ECharts :options="pie"></ECharts>
         </div>
       </Card>
-    </div>
+    </div> -->
 
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
@@ -517,7 +523,7 @@
   .flex-container {
     #problem-main {
       flex: auto;
-      margin-right: 18px;
+      display: flex;
     }
     #right-column {
       flex: none;
@@ -560,8 +566,6 @@
   }
 
   #submit-code {
-    margin-top: 20px;
-    margin-bottom: 20px;
     .status {
       float: left;
       span {
@@ -578,6 +582,44 @@
       }
     }
   }
+
+  .ivu-card, .info-side {
+    width: 100%;
+    position: relative;
+  }
+
+  .info-side {
+
+  }
+
+  .tab-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-decoration: none;
+    list-style: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background: #d5d5d5;
+  }
+
+  .tab {
+    float: left;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 10px 25px;
+  }
+
+  .tab.active {
+    background: #fff;
+  }
+
+  .tab.active::after {
+    background: #fff;
+  }
+
+
 
   #info {
     margin-bottom: 20px;
