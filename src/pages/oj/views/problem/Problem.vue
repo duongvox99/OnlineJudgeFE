@@ -2,64 +2,67 @@
   <div class="flex-container">
     <div id="problem-main">
       <!--problem main-->
+      <div class="description-side">
+        <Tabs value="name1">
+          <TabPane label="标签一" name="name1">
+            <div slot="title">{{problem.title}}</div>
+            <div id="problem-content" class="markdown-body" v-katex>
+              <p class="title">{{$t('m.Description')}}</p>
+              <p class="content" v-html=problem.description></p>
+              <!-- {{$t('m.music')}} -->
+              <p class="title">{{$t('m.Input')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.FromFile')}}: {{ problem.io_mode.input }})</span></p>
+              <p class="content" v-html=problem.input_description></p>
 
-      <Panel :padding="40" shadow>
-        <ul class="tab-menu">
-          <li class="tab active">hehe</li>
-          <li class="tab">hoho</li>
-        </ul>
-        <div slot="title">{{problem.title}}</div>
-        <div id="problem-content" class="markdown-body" v-katex>
-          <p class="title">{{$t('m.Description')}}</p>
-          <p class="content" v-html=problem.description></p>
-          <!-- {{$t('m.music')}} -->
-          <p class="title">{{$t('m.Input')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.FromFile')}}: {{ problem.io_mode.input }})</span></p>
-          <p class="content" v-html=problem.input_description></p>
+              <p class="title">{{$t('m.Output')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.ToFile')}}: {{ problem.io_mode.output }})</span></p>
+              <p class="content" v-html=problem.output_description></p>
 
-          <p class="title">{{$t('m.Output')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.ToFile')}}: {{ problem.io_mode.output }})</span></p>
-          <p class="content" v-html=problem.output_description></p>
-
-          <div v-for="(sample, index) of problem.samples" :key="index">
-            <div class="flex-container sample">
-              <div class="sample-input">
-                <p class="title">{{$t('m.Sample_Input')}} {{index + 1}}
-                  <a class="copy"
-                    v-clipboard:copy="sample.input"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onCopyError">
-                    <Icon type="clipboard"></Icon>
-                  </a>
-                </p>
-                <pre>{{sample.input}}</pre>
+              <div v-for="(sample, index) of problem.samples" :key="index">
+                <div class="flex-container sample">
+                  <div class="sample-input">
+                    <p class="title">{{$t('m.Sample_Input')}} {{index + 1}}
+                      <a class="copy"
+                        v-clipboard:copy="sample.input"
+                        v-clipboard:success="onCopy"
+                        v-clipboard:error="onCopyError">
+                        <Icon type="clipboard"></Icon>
+                      </a>
+                    </p>
+                    <pre>{{sample.input}}</pre>
+                  </div>
+                  <div class="sample-output">
+                    <p class="title">{{$t('m.Sample_Output')}} {{index + 1}}</p>
+                    <pre>{{sample.output}}</pre>
+                  </div>
+                </div>
               </div>
-              <div class="sample-output">
-                <p class="title">{{$t('m.Sample_Output')}} {{index + 1}}</p>
-                <pre>{{sample.output}}</pre>
+
+              <div v-if="problem.hint">
+                <p class="title">{{$t('m.Hint')}}</p>
+                <Card dis-hover>
+                  <div class="content" v-html=problem.hint></div>
+                </Card>
+              </div>
+
+              <div v-if="problem.source">
+                <p class="title">{{$t('m.Source')}}</p>
+                <p class="content">{{problem.source}}</p>
               </div>
             </div>
-          </div>
-
-          <div v-if="problem.hint">
-            <p class="title">{{$t('m.Hint')}}</p>
-            <Card dis-hover>
-              <div class="content" v-html=problem.hint></div>
-            </Card>
-          </div>
-
-          <div v-if="problem.source">
-            <p class="title">{{$t('m.Source')}}</p>
-            <p class="content">{{problem.source}}</p>
-          </div>
-
-        </div>
-      </Panel>
+          </TabPane>
+          <TabPane label="标签二" name="name2">标签二的内容</TabPane>
+          <TabPane label="标签三" name="name3">标签三的内容</TabPane>
+        </Tabs>
+      </div>
+        <!-- <ul class="tab-menu">
+          <li class="tab active">hehe</li>
+          <li class="tab">hoho</li>
+        </ul> -->
       <!--problem main end-->
       <Card :padding="20" id="submit-code" dis-hover>
         <CodeMirror :value.sync="code"
                     :languages="problem.languages"
                     :language="language"
                     :theme="theme"
-                    :style="{ height: '400px', 'overflow-y': 'scroll' }"
                     @resetCode="onResetToTemplate"
                     @changeTheme="onChangeTheme"
                     @changeLang="onChangeLang"></CodeMirror>
@@ -532,14 +535,16 @@
   }
 
   #problem-content {
-    margin-top: -50px;
+    padding: 0 20px;
     .title {
       font-size: 20px;
       font-weight: 400;
-      margin: 25px 0 8px 0;
       color: #3091f2;
       .copy {
         padding-left: 8px;
+      }
+      :not(:first-child) {
+        margin: 25px 0 8px 0;
       }
     }
     p.content {
@@ -565,7 +570,14 @@
     }
   }
 
+  
   #submit-code {
+    .vue-codemirror-wrap::v-deep {
+        // 40px padding top bottom - 80px header - 52px header editor - 32px submit row, 
+        max-height: calc(100vh - 184px) !important;
+        overflow-y: scroll !important;
+    }
+
     .status {
       float: left;
       span {
@@ -583,40 +595,14 @@
     }
   }
 
-  .ivu-card, .info-side {
-    width: 100%;
+  .ivu-card {
     position: relative;
+    flex: 3;
   }
-
-  .info-side {
-
-  }
-
-  .tab-menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-decoration: none;
-    list-style: none;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    background: #d5d5d5;
-  }
-
-  .tab {
-    float: left;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    padding: 10px 25px;
-  }
-
-  .tab.active {
+  
+  .description-side {
     background: #fff;
-  }
-
-  .tab.active::after {
-    background: #fff;
+    flex: 2;
   }
 
 
