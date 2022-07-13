@@ -90,7 +90,6 @@
       },
       handleAddClick () {
         this.activeModal = this.activeTab
-        console.log('activeModal', this.activeModal)
       },
       handleCloseModal ({status, shouldUpdate}) {
         this.activeModal = status
