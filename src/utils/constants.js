@@ -91,6 +91,40 @@ export const CONTEST_STATUS_REVERSE = {
   }
 }
 
+export const CONTEST_VISIBILITY_STATUS = {
+  true: {
+    name: 'Visible',
+    color: 'green'
+  },
+  false: {
+    name: 'Invisible',
+    color: 'red'
+  }
+}
+
+export const USER_ACHIEVEMENT_BADGE = {
+  '0': {
+    name: 'Bronze Medal',
+    color: '#CD7F32'
+  },
+  '1': {
+    name: 'Silver Medal',
+    color: '#C0C0C0'
+  },
+  '2': {
+    name: 'Platinum Medal',
+    color: '#E5E4E2'
+  },
+  '3': {
+    name: 'Gold Medal',
+    color: '#FFD700'
+  },
+  '4': {
+    name: 'Diamond Medal',
+    color: '#b9f2ff'
+  }
+}
+
 export const RULE_TYPE = {
   ACM: 'ACM',
   OI: 'OI'

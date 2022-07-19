@@ -98,7 +98,7 @@
         </el-button>
         <el-button v-if="contestId" type="primary"
                    size="small" icon="el-icon-plus"
-                   @click="addProblemDialogVisible = true">Add From Public Problem
+                   @click="addProblemDialogVisible = true">Clone From Public Problem
         </el-button>
         <el-pagination
           class="page"

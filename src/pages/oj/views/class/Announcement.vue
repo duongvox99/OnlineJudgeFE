@@ -11,6 +11,7 @@
         <table class="table-announcements" key="list">
           <tr>
             <th class="title">Title</th>
+            <th class="tag" v-if="isAdminRole">Visible</th>
             <th class="last-update">Last update at</th>
             <th class="create-at">Create at</th>
             <th class="create-by">Create by</th>
@@ -21,6 +22,14 @@
               <a class="entry" @click="goAnnouncement(announcement.id)">
                 {{announcement.title}}
               </a>
+            </td>
+            <td class="tag" v-if="isAdminRole">
+                <template v-if="announcement.visible">
+                  <Icon type="toggle-filled"></Icon>
+                </template>
+                <template v-else>
+                  <Icon type="toggle"></Icon>
+                </template>
             </td>
             <td class="last-update">{{announcement.last_update_time | localtime}}</td>
             <td class="create-at">{{announcement.create_time | localtime}}</td>
@@ -91,28 +100,31 @@
       goBack () {
         this.announcement = null
       },
+      deleteAnnouncement (id) {
+        this.$Modal.confirm({
+          content: 'Are you sure to delete this announcement',
+          onOk: () => {
+            // still error here, not fix yet
+            api.deleteAnnouncement(this.data.id, id).then(resp => {
+              if (!resp.error) {
+                this.$success('Delete successfully')
+                this.setupAnnouncements()
+              } else {
+                this.$error('Some thing went wrong')
+              }
+            }).catch(err => {
+              this.$error('Some thing went wrong ', err)
+            })
+          }
+        })
+      },
       handleSelectDropdown (event, id) {
         switch (event) {
           case '0':
             this.$emit('onEdit', id)
             break
           default:
-            this.$Modal.confirm({
-              content: 'Are you sure to delete this announcement',
-              onOk: () => {
-                // still error here, not fix yet
-                api.deleteAnnouncement(this.data.id, id).then(resp => {
-                  if (!resp.error) {
-                    this.$success('Delete successfully')
-                    this.setupAnnouncements()
-                  } else {
-                    this.$error('Some thing went wrong')
-                  }
-                }).catch(err => {
-                  this.$error('Some thing went wrong ', err)
-                })
-              }
-            })
+            this.deleteAnnouncement(id)
             break
         }
       }
@@ -151,13 +163,20 @@
       .title {
         text-align: left;
         padding-left: 10px;
-        width: 50%;
+        width: 40%;
         a.entry {
           color: #495060;
           &:hover {
             color: #2d8cf0;
             border-bottom: 1px solid #2d8cf0;
           }
+        }
+      }
+      .tag {
+        text-align: center;
+        width: 10%;
+        &:not(th) {
+          font-size: 29px;
         }
       }
       .last-update {

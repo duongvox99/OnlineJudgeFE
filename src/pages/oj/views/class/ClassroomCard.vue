@@ -1,5 +1,5 @@
 <template>
-  <div class="card-class" :class="{'invisible': !this.classroom.visible}">
+  <div class="card-class" :class="{'invisible': !this.classroom.visible && isAdminRole}">
     <div class="header" :style="{background: getRandomColor(this.classroom.name + this.classroom.subject_name + this.classroom.group_name + this.classroom.room_name)}">
       <Dropdown 
         trigger="click" 
@@ -41,6 +41,7 @@
 
 <script>
   import { randomColor } from '@/utils/constants'
+import { mapGetters } from 'vuex'
 
   export default {
     name: 'ClassroomCard',
@@ -69,6 +70,9 @@
       getRandomColor (input) {
         return randomColor(input)
       }
+    },
+    computed: {
+      ...mapGetters(['isAdminRole'])
     }
   }
 </script>

@@ -88,6 +88,9 @@ export default {
       isCollapsed: false
     }
   },
+  updated () {
+    this.getActiveMenu()
+  },
   methods: {
     handleRoute (route) {
       if (route && route.indexOf('admin') < 0) {
@@ -99,6 +102,9 @@ export default {
     collapsedSider () {
       this.$refs.side1.toggleCollapse()
       this.$emit('isCollapsed', this.isCollapsed)
+    },
+    getActiveMenu () {
+      this.activeMenu = '/' + this.$route.path.split('/')[1]
     }
   },
   computed: {
@@ -118,7 +124,6 @@ export default {
         this.isCollapsed ? 'collapsed-menu' : ''
       ]
     }
-
   }
 }
 </script>
