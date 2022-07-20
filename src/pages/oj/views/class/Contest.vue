@@ -29,15 +29,22 @@
           </ul>
         </Col>
         <Col :span="4" style="text-align: center">
+          <Tag type="dot" :color="CONTEST_VISIBILITY_STATUS[contest.visible].color">{{CONTEST_VISIBILITY_STATUS[contest.visible].name}}</Tag>
           <Tag type="dot" :color="CONTEST_STATUS_REVERSE[contest.status].color">{{$t('m.' + CONTEST_STATUS_REVERSE[contest.status].name.replace(/ /g, "_"))}}</Tag>
-          <Button 
+          <Dropdown 
             v-if="isAdminRole"
-            type="text" 
-            shape="circle" 
-            icon="trash-b"
-            class="delete-btn"
-            @click="deleteContest(contest.id)">
-          </Button>
+            trigger="click" 
+            placement="bottom-end" 
+            @on-click="handleSelectDropdown($event, contest.id)">
+            <Button 
+              type="text" 
+              shape="circle" 
+              icon="more"></Button>
+            <DropdownMenu slot="list">
+              <DropdownItem name="0">Edit</DropdownItem>
+              <DropdownItem name="1">Delete</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </Col>
       </Row>
     </li>
@@ -46,7 +53,7 @@
 
 <script>
   import time from '@/utils/time'
-  import { CONTEST_STATUS_REVERSE } from '@/utils/constants'
+  import { CONTEST_STATUS_REVERSE, CONTEST_VISIBILITY_STATUS } from '@/utils/constants'
   import api from '@oj/api'
 import { mapGetters } from 'vuex'
   export default {
@@ -59,7 +66,8 @@ import { mapGetters } from 'vuex'
     data () {
       return {
         contests: [],
-        CONTEST_STATUS_REVERSE: CONTEST_STATUS_REVERSE
+        CONTEST_STATUS_REVERSE: CONTEST_STATUS_REVERSE,
+        CONTEST_VISIBILITY_STATUS: CONTEST_VISIBILITY_STATUS
       }
     },
     mounted () {
@@ -99,6 +107,16 @@ import { mapGetters } from 'vuex'
             })
           }
         })
+      },
+      handleSelectDropdown (event, id) {
+        switch (event) {
+          case '1':
+            this.deleteContest(id)
+            break
+          default:
+            window.location.replace(`/admin/contest/${id}/edit`)
+            break
+        }
       }
     },
     computed: {

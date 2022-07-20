@@ -1,10 +1,30 @@
 <template>
   <div>
-    <el-input
-      v-model="keyword"
-      placeholder="Keywords"
-      prefix-icon="el-icon-search">
-    </el-input>
+    <div class="header">
+      <el-select v-model="difficulty" @change="filterDifficulty()">
+        <el-option
+          label="All"
+          :value="''">
+        </el-option> 
+        <el-option
+          label="Low"
+          :value="'Low'">
+        </el-option> 
+        <el-option
+          label="Mid"
+          :value="'Mid'">
+        </el-option> 
+        <el-option
+          label="High"
+          :value="'High'">
+        </el-option>
+      </el-select>
+      <el-input
+        v-model="keyword"
+        placeholder="Keywords"
+        prefix-icon="el-icon-search">
+      </el-input>
+    </div>
     <el-table :data="problems" v-loading="loading">
       <el-table-column
         label="ID"
@@ -55,7 +75,8 @@
         loading: false,
         problems: [],
         contest: {},
-        keyword: ''
+        keyword: '',
+        difficulty: ''
       }
     },
     mounted () {
@@ -72,7 +93,9 @@
           keyword: this.keyword,
           offset: (page - 1) * this.limit,
           limit: this.limit,
-          rule_type: this.contest.rule_type
+          rule_type: this.contest.rule_type,
+          difficulty: this.difficulty,
+          is_use_for_contest: false
         }
         api.getProblemList(params).then(res => {
           this.loading = false
@@ -89,11 +112,18 @@
             display_id: value
           }
           api.addProblemFromPublic(data).then(() => {
-            this.$emit('on-change')
+            console.log('hehe', data)
+            if (!data.error) {
+              this.$success('Successfully clone problems')
+              this.$emit('on-change')
+            }
           }, () => {
           })
         }, () => {
         })
+      },
+      filterDifficulty () {
+        this.getPublicProblem(1)
       }
     },
     watch: {
@@ -103,10 +133,17 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
   .page {
     margin-top: 20px;
     text-align: right
   }
 
+  .header {
+    display: flex;
+
+    .el-select {
+      width: 100px;
+    }
+  }
 </style>

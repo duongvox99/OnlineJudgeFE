@@ -113,10 +113,12 @@
   }
 
   @media screen and (min-width: 1200px) {
-    .flex-container #problem-main, .info-side {
-      height: calc(100vh - 150px);
+    #problem-wrapper {
+      #nocode-side {
+        height: calc(100vh - 149px) !important;
+      }
     }
-    
+
     .CodeMirror-scroll {
       height: calc(100vh - 300px) !important;
     }

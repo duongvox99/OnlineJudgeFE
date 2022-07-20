@@ -230,9 +230,17 @@ export default {
       }
     })
   },
-  getProblemList ({isUseForContest, ...params}) {
+  getProblemList ({isUseForContest, difficulty, ...params}) {
     params = utils.filterEmptyValue(params)
-    return ajax(`admin/problem/?is_use_for_contest=${isUseForContest}`, 'get', {
+    let query = ''
+    if (isUseForContest && !difficulty) {
+      query += `?is_use_for_contest=${isUseForContest}`
+    } else if (difficulty && !isUseForContest) {
+      query += `?difficulty=${difficulty}`
+    } else if (isUseForContest && difficulty) {
+      query += `?is_use_for_contest=${isUseForContest}&difficulty=${difficulty}`
+    }
+    return ajax(`admin/problem/${query}`, 'get', {
       params
     })
   },

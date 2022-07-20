@@ -6,8 +6,12 @@
     <Card :padding="100">
       <div v-if="profile.user">
         <p style="margin-top: -10px">
+          <Tooltip :content="USER_ACHIEVEMENT_BADGE[badgeType].name">
+            <Icon class="user-badge" :color="USER_ACHIEVEMENT_BADGE[badgeType].color" type="ribbon-a"></Icon>
+          </Tooltip>
           <span v-if="profile.user" class="emphasis">{{profile.user.username}}</span>
           <span v-if="profile.school">@{{profile.school}}</span>
+          <span >@ profile.school </span>
         </p>
         <p v-if="profile.mood">
           {{profile.mood}}
@@ -63,6 +67,7 @@
 <script>
   import { mapActions } from 'vuex'
   import time from '@/utils/time'
+  import { USER_ACHIEVEMENT_BADGE } from '@/utils/constants'
   import api from '@oj/api'
 
   export default {
@@ -70,7 +75,8 @@
       return {
         username: '',
         profile: {},
-        problems: []
+        problems: [],
+        USER_ACHIEVEMENT_BADGE: USER_ACHIEVEMENT_BADGE
       }
     },
     mounted () {
@@ -118,6 +124,19 @@
         if (!this.username) return true
         if (this.username && this.username === this.$store.getters.user.username) return true
         return false
+      },
+      badgeType () {
+        if (this.profile.total_score <= 5) {
+          return '0'
+        } else if (this.profile.total_score <= 20) {
+          return '1'
+        } else if (this.profile.total_score <= 50) {
+          return '2'
+        } else if (this.profile.total_score <= 100) {
+          return '3'
+        } else {
+          return '4'
+        }
       }
     },
     watch: {
@@ -139,6 +158,10 @@
     p {
       margin-top: 8px;
       margin-bottom: 8px;
+    }
+    .user-badge {
+      font-size: 25px;
+      margin-right: 5px;
     }
     .avatar-container {
       position: absolute;
