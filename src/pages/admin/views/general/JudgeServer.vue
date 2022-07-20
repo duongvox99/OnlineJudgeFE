@@ -86,7 +86,7 @@
       this.refreshJudgeServerList()
       this.intervalId = setInterval(() => {
         this.refreshJudgeServerList()
-      }, 5000)
+      }, 10000)
     },
     methods: {
       refreshJudgeServerList () {
