@@ -62,6 +62,6 @@ typings/
 test.vue
 
 # build
-vendor-manifest.json
-vendor.dll*.js
+# vendor-manifest.json
+# vendor.dll*.js
 
