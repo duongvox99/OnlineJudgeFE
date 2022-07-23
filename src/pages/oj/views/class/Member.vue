@@ -161,7 +161,7 @@
       },
       deleteMember (userId) {
         this.$Modal.confirm({
-          content: 'Are you sure to delete this member',
+          content: this.$t('m.Delete_member_confirm'),
           onOk: () => {
             // still error here, not fix yet
             api.deleteMemberClassroom(this.data.id, userId).then(resp => {

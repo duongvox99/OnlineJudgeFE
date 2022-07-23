@@ -3,7 +3,7 @@
     <template slot="title">
       <Breadcrumb>
         <div @click="backToClasses()" style="display: inline;">
-          <BreadcrumbItem to="/class">Classes</BreadcrumbItem>
+          <BreadcrumbItem to="/class">{{$t('m.Classes')}}</BreadcrumbItem>
         </div>
         <BreadcrumbItem 
           v-if="selectedClassroom && selectedClassroom['id']">

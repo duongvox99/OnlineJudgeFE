@@ -98,6 +98,7 @@ export const m = {
   New_Tag: 'New Tag',
    // ProblemList.vue
   Contest_Problem_List: 'Contest Problem List',
+  Clone_From_Prolems: 'Clone From Problem List',
   // Contest.vue
   ContestTitle: 'Title',
   ContestDescription: 'Description',
@@ -120,5 +121,9 @@ export const m = {
   Welcome_to_Login: 'Welcome to Login',
   GO: 'GO',
   username: 'username',
-  password: 'password'
+  password: 'password',
+  // Common
+  btn_create: 'Create',
+  public: 'Public',
+  for_contest: 'For Contest'
 }

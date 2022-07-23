@@ -257,5 +257,25 @@ export const m = {
   UserHomeserSubmissions: 'Submissions',
   UserHomeScore: 'Score',
   List_Solved_Problems: 'List of solved problems',
-  UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.'
+  UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.',
+  // Classes.vue
+  Classes: 'Classes',
+  Edit: 'Edit',
+  Delete: 'Delete',
+  Classroom: 'Classroom',
+  Create: 'Create',
+  Update: 'Update',
+  Visible: 'Visible',
+  Invisible: 'Invisible',
+  Classroom_name: 'Classroom name',
+  Subject_name: 'Subject name',
+  Room_name: 'Room name',
+  Group_name: 'Group name',
+  Grades: 'Xếp hạng điểm',
+  Members: 'Members',
+  Teacher: 'Teacher',
+  Student: 'Student',
+  Title: 'Title',
+  Delete_member_confirm: 'Are you sure to delete this member?',
+  Delete_contest_confirm: 'Are you sure to remove this contest?'
 }

@@ -4,7 +4,7 @@
     <div>
       <Form ref="formAnnouncement" :model="formAnnouncement" :rules="ruleAnnouncement">
         <FormItem prop="title">
-          <Input type="text" v-model="formAnnouncement.title" placeholder="Title" size="large">
+          <Input type="text" v-model="formAnnouncement.title" :placeholder="$t('m.Title')" size="large">
             <Icon type="ios-information-outline" slot="prepend"></Icon>
           </Input>
         </FormItem>
@@ -13,8 +13,8 @@
         </FormItem>
         <FormItem prop="visible">
           <i-switch v-model="formAnnouncement.visible" size="large">
-            <span slot="open">Visible</span>
-            <span slot="close">Invisible</span>
+            <span slot="open">{{$t('m.Visible')}}</span>
+            <span slot="close">{{$t('m.Invisible')}}</span>
           </i-switch>
         </FormItem>
       </Form>
@@ -118,10 +118,10 @@
     },
     computed: {
       btnLabel () {
-        return !this.editedAnnouncementId ? 'Create' : 'Update'
+        return !this.editedAnnouncementId ? this.$i18n.t('m.Create') : this.$i18n.t('m.Update')
       },
       title () {
-        return (!this.editedAnnouncementId ? 'Create New' : 'Update') + ' Classroom'
+        return this.btnLabel + ' ' + this.$i18n.t('m.Classroom')
       }
     },
     watch: {

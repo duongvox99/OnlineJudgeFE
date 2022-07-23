@@ -5,13 +5,11 @@
     </div>
     <Card :padding="100">
       <div v-if="profile.user">
-        <p style="margin-top: -10px">
+        <p class="basic-info" style="margin-top: -10px">
+          <span v-if="profile.user" class="emphasis">{{profile.user.username}}</span>
           <Tooltip :content="USER_ACHIEVEMENT_BADGE[badgeType].name">
             <Icon class="user-badge" :color="USER_ACHIEVEMENT_BADGE[badgeType].color" type="ribbon-a"></Icon>
           </Tooltip>
-          <span v-if="profile.user" class="emphasis">{{profile.user.username}}</span>
-          <span v-if="profile.school">@{{profile.school}}</span>
-          <span >@ profile.school </span>
         </p>
         <p v-if="profile.mood">
           {{profile.mood}}
@@ -158,6 +156,12 @@
     p {
       margin-top: 8px;
       margin-bottom: 8px;
+    }
+
+    .basic-info {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
     }
     .user-badge {
       font-size: 25px;

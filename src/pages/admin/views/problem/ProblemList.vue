@@ -2,14 +2,14 @@
   <div class="view">
     <Panel :title="contestId ? this.$i18n.t('m.Contest_Problem_List') : this.$i18n.t('m.Problem_List')">
       <template slot="header">
-        <el-select v-model="isUseForContest" placeholder="Select" @change="filterContestChange()">
+        <el-select v-if="!isContestProblem" v-model="isUseForContest" placeholder="Select" @change="filterContestChange()">
           <el-option
-            label="Public"
+            :label="$t('m.public')"
             :value="false"
           >
           </el-option>
           <el-option
-            label="For Contest"
+            :label="$t('m.for_contest')"
             :value="true"
           >
           </el-option>
@@ -93,12 +93,15 @@
         </el-table-column>
       </el-table>
       <div class="panel-options">
-        <el-button type="primary" size="small"
-                   @click="goCreateProblem" icon="el-icon-plus">Create
+        <el-button 
+          type="primary" size="small"
+          @click="goCreateProblem" icon="el-icon-plus">
+          {{$t('m.btn_create')}}
         </el-button>
         <el-button v-if="contestId" type="primary"
                    size="small" icon="el-icon-plus"
-                   @click="addProblemDialogVisible = true">Clone From Public Problem
+                   @click="addProblemDialogVisible = true">
+                   {{$t('m.Clone_From_Prolems')}}
         </el-button>
         <el-pagination
           class="page"
@@ -158,7 +161,8 @@
         InlineEditDialogVisible: false,
         makePublicDialogVisible: false,
         addProblemDialogVisible: false,
-        isUseForContest: false
+        isUseForContest: false,
+        isContestProblem: false
       }
     },
     mounted () {
@@ -191,6 +195,7 @@
       },
       getProblemList (page = 1) {
         this.loading = true
+        this.isContestProblem = this.routeName === 'contest-problem-list'
         let funcName = this.routeName === 'problem-list' ? 'getProblemList' : 'getContestProblemList'
         let params = {
           limit: this.pageSize,
