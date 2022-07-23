@@ -68,11 +68,11 @@
     data () {
       return {
         classMenu: [
-          {title: 'Home', to: '/', tab: '0'},
-          {title: 'Announcements', to: '/', tab: '1'},
-          {title: 'Contest', to: '/', tab: '2'},
-          {title: 'Grades', to: '/', tab: '3'},
-          {title: 'Members', to: '/', tab: '4'}
+          {title: this.$t('m.Home'), to: '/', tab: '0'},
+          {title: this.$t('m.Announcements'), to: '/', tab: '1'},
+          {title: this.$t('m.Contest'), to: '/', tab: '2'},
+          {title: this.$t('m.Grades'), to: '/', tab: '3'},
+          {title: this.$t('m.Members'), to: '/', tab: '4'}
         ],
         activeTab: '0',
         activeModal: null,
@@ -138,11 +138,11 @@
       labelBtnAdd () {
         switch (this.activeTab) {
           case '1':
-            return '+ New announcement'
+            return `+ ${this.$t('m.Create')} ${this.$t('m.Announcement')}`
           case '2':
-            return '+ New Contest'
+            return `+ ${this.$t('m.Create')} ${this.$t('m.Contest')}`
           default:
-            return '+ New'
+            return `+ ${this.$t('m.Create')}`
         }
       }
     }

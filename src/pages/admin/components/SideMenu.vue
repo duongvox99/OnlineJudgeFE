@@ -9,7 +9,7 @@
     </div>
     <el-menu-item index="/">
       <i class="el-icon-fa-dashboard"></i>
-      <span>Dashboard</span>
+      <span>{{$t('m.Dashboard')}}</span>
     </el-menu-item>
 
     <el-submenu v-if="isSuperAdmin" index="general">

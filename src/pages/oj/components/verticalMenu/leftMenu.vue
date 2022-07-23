@@ -13,7 +13,7 @@
       <MenuItem v-if="isAuthenticated" name="/class">
         <Icon type="ios-people"></Icon>
         <span>
-          Classes
+          {{$t('m.Classes')}}
         </span>
       </MenuItem>
       <MenuItem name="/problem">

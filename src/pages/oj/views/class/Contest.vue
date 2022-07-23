@@ -3,7 +3,7 @@
     <li v-for="contest in contests" :key="contest.title">
       <Row type="flex" justify="space-between" align="middle">
         <img class="trophy" src="../../../../assets/Cup.png"/>
-        <Col :span="18" class="contest-main">
+        <Col :span="14" class="contest-main">
           <p class="title">
             <a class="entry" @click.stop="goContest(contest.id)">
               {{contest.title}}
@@ -28,8 +28,8 @@
             </li>
           </ul>
         </Col>
-        <Col :span="4" style="text-align: center">
-          <Tag type="dot" :color="CONTEST_VISIBILITY_STATUS[contest.visible].color">{{CONTEST_VISIBILITY_STATUS[contest.visible].name}}</Tag>
+        <Col :span="8" style="text-align: end">
+          <Tag type="dot" :color="CONTEST_VISIBILITY_STATUS[contest.visible].color">{{$t('m.' + CONTEST_VISIBILITY_STATUS[contest.visible].name)}}</Tag>
           <Tag type="dot" :color="CONTEST_STATUS_REVERSE[contest.status].color">{{$t('m.' + CONTEST_STATUS_REVERSE[contest.status].name.replace(/ /g, "_"))}}</Tag>
           <Dropdown 
             v-if="isAdminRole"
@@ -41,8 +41,8 @@
               shape="circle" 
               icon="more"></Button>
             <DropdownMenu slot="list">
-              <DropdownItem name="0">Edit</DropdownItem>
-              <DropdownItem name="1">Delete</DropdownItem>
+              <DropdownItem name="0">{{$t('m.Edit')}}</DropdownItem>
+              <DropdownItem name="1">{{$t('m.Delete')}}</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -92,7 +92,7 @@ import { mapGetters } from 'vuex'
       },
       deleteContest (id) {
         this.$Modal.confirm({
-          content: 'Are you sure to remove this contest',
+          content: this.$t('m.Delete_contest_confirm'),
           onOk: () => {
             // still error here, not fix yet
             api.unMappingContest(this.data.id, id).then(resp => {
@@ -114,7 +114,8 @@ import { mapGetters } from 'vuex'
             this.deleteContest(id)
             break
           default:
-            window.location.replace(`/admin/contest/${id}/edit`)
+            const route = this.$router.resolve({ path: `/admin/contest/${id}/edit` })
+            window.open(route.href)
             break
         }
       }
@@ -126,6 +127,9 @@ import { mapGetters } from 'vuex'
 </script>
 
 <style scoped lang="less">
+  .ivu-dropdown-item {
+      text-align: left;
+  }
   #contest-list {
     > li {
       padding: 20px;

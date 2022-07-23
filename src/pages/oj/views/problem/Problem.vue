@@ -46,6 +46,7 @@
               <p class="content">{{problem.source}}</p>
             </div>
           </div>
+          <div class="add-on-info">
             <div id="info">
               <p class="title">{{$t('m.Information')}}</p>
               <ul>
@@ -88,18 +89,14 @@
                 </li>
               </ul>
             </div>
-        </TabPane>
-        <TabPane label="Static" name="static">
-          <div id="pieChart" :padding="0" v-if="!this.contestID || OIContestRealTimePermission">
-            <div class="title">
-              <div>
-                <Icon type="ios-analytics"></Icon>
-                <span class="card-title">{{$t('m.Statistic')}}</span>
+            <div id="statistic" :padding="0" v-if="!this.contestID || OIContestRealTimePermission">
+              <div class="title-wrapper">
+                <p class="title">{{$t('m.Statistic')}}</p>
+                <Button type="ghost" size="small" id="detail" @click="graphVisible = !graphVisible">Details</Button>
               </div>
-              <Button type="ghost" size="small" id="detail" @click="graphVisible = !graphVisible">Details</Button>
-            </div>
-            <div class="echarts">
-              <ECharts :options="pie"></ECharts>
+              <div class="echarts">
+                <ECharts :options="pie"></ECharts>
+              </div>
             </div>
           </div>
         </TabPane>
@@ -533,26 +530,54 @@
     padding: 0px 20px
   }
 
-  #info {
+  .add-on-info {
     margin-top: 15px;
-    .title {
-      font-size: 20px;
-      font-weight: 400;
-      color: #3091f2;
-      margin-bottom: 15px;
-    }
-    ul {
-      list-style-type: none;
-      li {
-        p {
-          margin-right: 20px;
-          font-size: 15px;
-          display: inline-block;
-          margin-bottom: 3px;
-          &:nth-child(1) {
-            width: 120px;
+    display: flex;
+    #info {
+      flex: 1;
+      .title {
+        font-size: 20px;
+        font-weight: 400;
+        color: #3091f2;
+        margin-bottom: 15px;
+      }
+      ul {
+        list-style-type: none;
+        li {
+          p {
+            margin-right: 20px;
+            font-size: 15px;
+            display: inline-block;
+            margin-bottom: 3px;
+            &:nth-child(1) {
+              width: 120px;
+            }
           }
         }
+      }
+    }
+
+    #statistic {
+      flex: 1;
+      .title-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .title {
+          font-size: 20px;
+          font-weight: 400;
+          color: #3091f2;
+          margin-bottom: 15px;
+        }
+        button {
+          height: 100%;
+        }
+      }
+      
+      .echarts {
+        height: 250px;
+        width: 210px;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }
@@ -612,20 +637,6 @@
 
   .fl-right {
     float: right;
-  }
-
-  #pieChart {
-
-    .title {
-      display: flex;
-      justify-content: space-between;
-    }
-    .echarts {
-      height: 250px;
-      width: 210px;
-      margin-left: auto;
-      margin-right: auto;
-    }
   }
 
   #pieChart-detail {

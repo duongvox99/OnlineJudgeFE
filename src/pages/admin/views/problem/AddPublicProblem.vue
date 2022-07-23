@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <el-select v-model="difficulty" @change="filterDifficulty()">
+      <el-select v-model="difficulty" @change="onFilter()">
         <el-option
           label="All"
           :value="''">
@@ -24,6 +24,16 @@
         placeholder="Keywords"
         prefix-icon="el-icon-search">
       </el-input>
+      <el-select v-model="isPrivate" @change="onFilter()">
+        <el-option
+          label="Public"
+          :value="false">
+        </el-option> 
+        <el-option
+          label="Private"
+          :value="true">
+        </el-option>
+      </el-select>
     </div>
     <el-table :data="problems" v-loading="loading">
       <el-table-column
@@ -76,7 +86,8 @@
         problems: [],
         contest: {},
         keyword: '',
-        difficulty: ''
+        difficulty: '',
+        isPrivate: false
       }
     },
     mounted () {
@@ -95,7 +106,7 @@
           limit: this.limit,
           rule_type: this.contest.rule_type,
           difficulty: this.difficulty,
-          is_use_for_contest: false
+          is_use_for_contest: this.isPrivate
         }
         api.getProblemList(params).then(res => {
           this.loading = false
@@ -122,7 +133,7 @@
         }, () => {
         })
       },
-      filterDifficulty () {
+      onFilter () {
         this.getPublicProblem(1)
       }
     },

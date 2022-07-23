@@ -10,7 +10,7 @@
       <template v-else>
         <table class="table-announcements" key="list">
           <tr>
-            <th class="title">Title</th>
+            <th class="title">{{$t('m.Title')}}</th>
             <th class="tag" v-if="isAdminRole">Visible</th>
             <th class="last-update">Last update at</th>
             <th class="create-at">Create at</th>
@@ -44,8 +44,8 @@
                   shape="circle" 
                   icon="more"></Button>
                 <DropdownMenu slot="list">
-                  <DropdownItem name="0">Edit</DropdownItem>
-                  <DropdownItem name="1">Delete</DropdownItem>
+                  <DropdownItem name="0">{{$t('m.Edit')}}</DropdownItem>
+                  <DropdownItem name="1">{{$t('m.Delete')}}</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </td>
