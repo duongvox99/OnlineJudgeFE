@@ -14,20 +14,20 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('m.Contest_Start_Time')" required>
+            <el-form-item :label="$t('m.Start_Time')" required>
               <el-date-picker
                 v-model="contest.start_time"
                 type="datetime"
-                :placeholder="$t('m.Contest_Start_Time')">
+                :placeholder="$t('m.Start_Time')">
               </el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item :label="$t('m.Contest_End_Time')" required>
+            <el-form-item :label="$t('m.End_Time')" required>
               <el-date-picker
                 v-model="contest.end_time"
                 type="datetime"
-                :placeholder="$t('m.Contest_End_Time')">
+                :placeholder="$t('m.End_Time')">
               </el-date-picker>
             </el-form-item>
           </el-col>

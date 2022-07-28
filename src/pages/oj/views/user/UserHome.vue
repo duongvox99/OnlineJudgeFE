@@ -35,8 +35,9 @@
             <Poptip v-if="refreshVisible" trigger="hover" placement="right-start">
               <Icon type="ios-help-outline"></Icon>
               <div slot="content">
-                <p>If you find the following problem id does not exist,<br> try to click the button.</p>
-                <Button type="info" @click="freshProblemDisplayID">regenerate</Button>
+                <p>{{$t('m.If_you_find_the_following_problem_id_does_not_exist')}},
+                <br> {{$t('m.try_to_click_the_button')}}.</p>
+                <Button type="info" @click="freshProblemDisplayID">{{$t('m.Refresh')}}</Button>
               </div>
             </Poptip>
           </div>
@@ -124,13 +125,13 @@
         return false
       },
       badgeType () {
-        if (this.profile.total_score <= 5) {
+        if (this.profile.total_score <= 500) {
           return '0'
-        } else if (this.profile.total_score <= 20) {
+        } else if (this.profile.total_score <= 1000) {
           return '1'
-        } else if (this.profile.total_score <= 50) {
+        } else if (this.profile.total_score <= 2000) {
           return '2'
-        } else if (this.profile.total_score <= 100) {
+        } else if (this.profile.total_score <= 3500) {
           return '3'
         } else {
           return '4'

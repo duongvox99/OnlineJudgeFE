@@ -138,11 +138,11 @@
       labelBtnAdd () {
         switch (this.activeTab) {
           case '1':
-            return `+ ${this.$t('m.Create')} ${this.$t('m.Announcement')}`
+            return `+ ${this.$t('m.New')} ${this.$t('m.Announcement')}`
           case '2':
-            return `+ ${this.$t('m.Create')} ${this.$t('m.Contest')}`
+            return `+ ${this.$t('m.Add')} ${this.$t('m.Contest')}`
           default:
-            return `+ ${this.$t('m.Create')}`
+            return `+ ${this.$t('m.New')}`
         }
       }
     }

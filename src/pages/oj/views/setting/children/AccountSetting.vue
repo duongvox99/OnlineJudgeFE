@@ -4,20 +4,20 @@
       <div class="left">
         <p class="section-title">{{$t('m.ChangePassword')}}</p>
         <Form class="setting-content" ref="formPassword" :model="formPassword" :rules="rulePassword">
-          <FormItem label="Old Password" prop="old_password">
+          <FormItem :label="$t('m.Current_password')" prop="old_password">
             <Input v-model="formPassword.old_password" type="password"/>
           </FormItem>
-          <FormItem label="New Password" prop="new_password">
+          <FormItem :label="$t('m.New_password')" prop="new_password">
             <Input v-model="formPassword.new_password" type="password"/>
           </FormItem>
-          <FormItem label="Confirm New Password" prop="again_password">
+          <FormItem :label="$t('m.Confirm_new_password')" prop="again_password">
             <Input v-model="formPassword.again_password" type="password"/>
           </FormItem>
           <FormItem v-if="visible.tfaRequired" label="Two Factor Auth" prop="tfa_code">
             <Input v-model="formPassword.tfa_code"/>
           </FormItem>
           <FormItem v-if="visible.passwordAlert">
-            <Alert type="success">You will need to login again after 5 seconds..</Alert>
+            <Alert type="success">{{$t('m.You_will_need_to_login_again_after_5_seconds')}}..</Alert>
           </FormItem>
           <Button type="primary" @click="changePassword">{{$t('m.Update_Password')}}</Button>
         </Form>
@@ -28,13 +28,13 @@
       <div class="right">
         <p class="section-title">{{$t('m.ChangeEmail')}}</p>
         <Form class="setting-content" ref="formEmail" :model="formEmail" :rules="ruleEmail">
-          <FormItem label="Current Password" prop="password">
+          <FormItem :label="$t('m.Current_password')" prop="password">
             <Input v-model="formEmail.password" type="password"/>
           </FormItem>
-          <FormItem label="Old Email">
+          <FormItem :label="$t('m.Old_Email')">
             <Input v-model="formEmail.old_email" disabled/>
           </FormItem>
-          <FormItem label="New Email" prop="new_email">
+          <FormItem :label="$t('m.New_Email')" prop="new_email">
             <Input v-model="formEmail.new_email"/>
           </FormItem>
           <FormItem v-if="visible.tfaRequired" label="Two Factor Auth" prop="tfa_code">
@@ -128,7 +128,7 @@
           api.changePassword(data).then(res => {
             this.loading.btnPassword = false
             this.visible.passwordAlert = true
-            this.$success('Update password successfully')
+            this.$success(this.$i18n.t('m.Update_password_successfully'))
             setTimeout(() => {
               this.visible.passwordAlert = false
               this.$router.push({name: 'logout'})
@@ -151,7 +151,7 @@
           api.changeEmail(data).then(res => {
             this.loading.btnEmail = false
             this.visible.emailAlert = true
-            this.$success('Change email successfully')
+            this.$success(this.$i18n.t('m.Update_email_successfully'))
             this.$refs.formEmail.resetFields()
           }, res => {
             if (res.data.data === 'tfa_required') {

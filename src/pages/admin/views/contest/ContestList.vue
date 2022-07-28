@@ -1,15 +1,15 @@
 <template>
   <div class="view">
-    <Panel title="Contest List">
+    <Panel :title="$t('m.Contest_List')">
       <template slot="header">
         <el-select v-model="isUseForClassroom" placeholder="Select" @change="filterContestChange()">
           <el-option
-            label="Public"
+            :label="$t('m.Public')"
             :value="false"
           >
           </el-option>
           <el-option
-            label="For Classroom"
+            :label="$t('m.For_classroom')"
             :value="true"
           >
           </el-option>
@@ -17,7 +17,7 @@
         <el-input
           v-model="keyword"
           prefix-icon="el-icon-search"
-          placeholder="Keywords">
+          :placeholder="$t('m.Keywords')">
         </el-input>
       </template>
       <el-table
@@ -28,10 +28,10 @@
         style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
-            <p>Start Time: {{props.row.start_time | localtime }}</p>
-            <p>End Time: {{props.row.end_time | localtime }}</p>
-            <p>Create Time: {{props.row.create_time | localtime}}</p>
-            <p>Creator: {{props.row.created_by.username}}</p>
+            <p>{{$t('m.Start_Time')}}: {{props.row.start_time | localtime }}</p>
+            <p>{{$t('m.End_Time')}}: {{props.row.end_time | localtime }}</p>
+            <p>{{$t('m.Created_at')}}: {{props.row.create_time | localtime}}</p>
+            <p>{{$t('m.Creator')}}: {{props.row.created_by.username}}</p>
           </template>
         </el-table-column>
         <el-table-column
@@ -41,17 +41,17 @@
         </el-table-column>
         <el-table-column
           prop="title"
-          label="Title">
+          :label="$t('m.Title')">
         </el-table-column>
         <el-table-column
-          label="Rule Type"
+          :label="$t('m.Rule_Type')"
           width="130">
           <template slot-scope="scope">
             <el-tag type="gray">{{scope.row.rule_type}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
-          label="Contest Type"
+          :label="$t('m.Contest_Type')"
           width="180">
           <template slot-scope="scope">
             <el-tag :type="scope.row.contest_type === 'Public' ? 'success' : 'primary'">
@@ -60,7 +60,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="Status"
+          :label="$t('m.Status')"
           width="130">
           <template slot-scope="scope">
             <el-tag
@@ -71,7 +71,7 @@
         </el-table-column>
         <el-table-column
           width="100"
-          label="Visible">
+          :label="$t('m.Visible')">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.visible"
                        active-text=""
@@ -83,13 +83,13 @@
         <el-table-column
           fixed="right"
           width="250"
-          label="Operation">
+          :label="$t('m.Option')">
           <div slot-scope="scope">
-            <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-            <icon-btn name="Problem" icon="list-ol" @click.native="goContestProblemList(scope.row.id)"></icon-btn>
-            <icon-btn name="Announcement" icon="info-circle"
+            <icon-btn :name="$t('m.Edit')" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
+            <icon-btn :name="$t('m.Problem')" icon="list-ol" @click.native="goContestProblemList(scope.row.id)"></icon-btn>
+            <icon-btn :name="$t('m.Announcement')" icon="info-circle"
                       @click.native="goContestAnnouncement(scope.row.id)"></icon-btn>
-            <icon-btn icon="download" name="Download Accepted Submissions"
+            <icon-btn icon="download" :name="$t('m.Download_Accepted_Submissions')"
                       @click.native="openDownloadOptions(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>

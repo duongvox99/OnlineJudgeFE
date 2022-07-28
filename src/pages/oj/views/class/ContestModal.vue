@@ -1,8 +1,8 @@
 <template>
-  <Modal v-model="visibleModal" class="large" :width="650" @on-cancel="closeModal()">
-    <div slot="header" class="modal-title">Add Contest</div>
-    <Input v-model="labelSearch" placeholder="Search by title" @input="handleInputSearch($event)" style="margin-bottom: 10px"></Input>
-    <div v-if="!contests.length" style="text-align: center">No data match</div>
+  <Modal v-model="visibleModal" class="large" class-name="vertical-center-modal" :width="650" @on-cancel="closeModal()">
+    <div slot="header" class="modal-title">{{$t('m.Add')}} {{$t('m.Contests')}}</div>
+    <Input v-model="labelSearch" :placeholder="$t('m.Search_by_title')" @input="handleInputSearch($event)" style="margin-bottom: 10px"></Input>
+    <div v-if="!contests.length" style="text-align: center">{{$t('m.No_data_match')}}</div>
     <Form v-else ref="formContest" :model="formContest">
       <FormItem>
         <CheckboxGroup v-model="formContest.contest_ids">
@@ -45,7 +45,7 @@
         @click="handleUpdateContest()"
         class="btn" long
         :loading="btnLoading">
-        {{btnLabel}}
+        {{this.$i18n.t('m.Add')}}
       </Button>
     </div>
     <div slot="footer" style="display: none"></div>
@@ -74,7 +74,6 @@
     },
     data () {
       return {
-        btnLabel: 'Add',
         btnLoading: false,
         contests: [],
         formContest: {
@@ -92,7 +91,6 @@
       },
       handleUpdateContest () {
         this.btnLoading = true
-        console.log(this.formContest)
         api.mappingContest(
           this.activeClassroom.id,
           this.formContest
@@ -126,7 +124,6 @@
       'visibleModal' (newValue, oldValue) {
         if (newValue && newValue !== oldValue) {
           api.getCanMappingContests(this.activeClassroom.id).then(resp => {
-            console.log('dataaaa', resp)
             this.contests = resp.data.data
           })
         }

@@ -10,8 +10,8 @@
           shape="circle" 
           icon="more"></Button>
         <DropdownMenu slot="list">
-          <DropdownItem name="0">Edit</DropdownItem>
-          <DropdownItem name="1">Delete</DropdownItem>
+          <DropdownItem name="0">{{$t('m.Edit')}}</DropdownItem>
+          <DropdownItem name="1">{{$t('m.Delete')}}</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>

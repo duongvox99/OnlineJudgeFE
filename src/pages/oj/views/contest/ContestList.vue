@@ -32,7 +32,7 @@
           </li>
           <li>
             <Input id="keyword" @on-enter="changeRoute" @on-click="changeRoute" v-model="query.keyword"
-                   icon="ios-search-strong" placeholder="Keyword"/>
+                   icon="ios-search-strong" :placeholder="$t('m.Keyword')"/>
           </li>
         </ul>
       </div>
@@ -87,7 +87,7 @@
   import time from '@/utils/time'
   import { CONTEST_STATUS_REVERSE, CONTEST_TYPE } from '@/utils/constants'
 
-  const limit = 10
+  const limit = 15
 
   export default {
     name: 'contest-list',
@@ -128,7 +128,7 @@
         this.query.rule_type = route.rule_type || ''
         this.query.keyword = route.keyword || ''
         this.page = parseInt(route.page) || 1
-        this.limit = parseInt(route.limit) || 10
+        this.limit = parseInt(route.limit) || 15
         this.getContestList(this.page)
       },
       getContestList (page = 1) {

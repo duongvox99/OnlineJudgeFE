@@ -1,8 +1,8 @@
 <template>
-  <Modal v-model="visibleModal" class="large" :width="450" @on-cancel="closeModal()">
+  <Modal v-model="visibleModal" class="large" class-name="vertical-center-modal" :width="450" @on-cancel="closeModal()">
     <div slot="header" class="modal-title">{{title}}</div>
-    <Input v-model="labelSearch" placeholder="Search by email, username" @input="handleInputSearch($event)" style="margin-bottom: 10px"></Input>
-    <div v-if="!users.length" style="text-align: center">No data match</div>
+    <Input v-model="labelSearch" placeholder="Search by email, username" @input="handleInputSearch()" style="margin-bottom: 10px"></Input>
+    <div v-if="!users.length" style="text-align: center">{{$t('m.No_data_match')}}</div>
     <Form v-else ref="formMember" :model="formMember">
       <FormItem>
         <CheckboxGroup v-model="formMember.user_ids">
@@ -100,11 +100,23 @@
       getRandomColor (input) {
         return randomColor(input)
       },
-      handleInputSearch (valueSearch) {
+      handleInputSearch () {
         clearTimeout(this.timeoutId)
         this.timeoutId = setTimeout(() => {
-          api.getUserCanAdd(this.activeClassroom.id, valueSearch).then(resp => {
+          api.getUserCanAdd(this.activeClassroom.id, this.labelSearch).then(resp => {
             this.users = resp.data.data
+            const userFindList = this.labelSearch.split(' ')
+            if (userFindList.length > 1) {
+              userFindList.forEach(userText => {
+                const existUser = this.users.find(u => u.user_username === userText || u.user_email === userText)
+                if (existUser) {
+                  const isUserSelected = this.formMember.user_ids.indexOf(existUser.user_id)
+                  if (isUserSelected === -1) {
+                    this.formMember.user_ids.push(existUser.user_id)
+                  }
+                }
+              })
+            }
           })
         }, 700)
       }

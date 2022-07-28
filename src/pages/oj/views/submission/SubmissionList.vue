@@ -286,7 +286,7 @@
         this.submissions[index].loading = true
         api.submissionRejudge(id).then(res => {
           this.submissions[index].loading = false
-          this.$success('Succeeded')
+          this.$success(this.$i18n.t('m.Succeeded'))
           this.getSubmissions()
         }, () => {
           this.submissions[index].loading = false

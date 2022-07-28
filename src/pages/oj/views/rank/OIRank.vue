@@ -41,7 +41,7 @@
             }
           },
           {
-            title: this.$i18n.t('m.User_User'),
+            title: this.$i18n.t('m.Users'),
             align: 'center',
             render: (h, params) => {
               return h('a', {

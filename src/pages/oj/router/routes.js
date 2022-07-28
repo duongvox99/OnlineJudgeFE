@@ -4,6 +4,7 @@ import {
   ACMRank,
   Announcements,
   ApplyResetPassword,
+  Bookmark,
   Classes,
   FAQ,
   Home,
@@ -173,6 +174,12 @@ export default [
     path: '/class/:id/detail',
     meta: {requiresAuth: true, title: 'Classes detail'},
     component: Classes
+  },
+  {
+    path: '/bookmarks',
+    name: 'bookmark',
+    meta: {requiresAuth: true, title: 'Bookmark'},
+    component: Bookmark
   },
   {
     path: '/about',

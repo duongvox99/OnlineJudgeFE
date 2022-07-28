@@ -2,7 +2,7 @@
   <div>
     <div style="padding-bottom: 10px;">
     </div>
-    <panel title="Export Problems (beta)">
+    <panel :title="$t('m.Export_Problems_Beta')">
       <div slot="header">
         <el-input
           v-model="keyword"
@@ -22,21 +22,21 @@
           prop="id">
         </el-table-column>
         <el-table-column
-          label="DisplayID"
+          :label="$t('m.Display_ID')"
           width="200"
           prop="_id">
         </el-table-column>
         <el-table-column
-          label="Title"
+          :label="$t('m.Title')"
           prop="title">
         </el-table-column>
         <el-table-column
           prop="created_by.username"
-          label="Author">
+          :label="$t('m.Author')">
         </el-table-column>
         <el-table-column
           prop="create_time"
-          label="Create Time">
+          :label="$t('m.Created_at')">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
@@ -45,7 +45,7 @@
 
       <div class="panel-options">
         <el-button type="primary" size="small" v-show="selected_problems.length"
-                   @click="exportProblems" icon="el-icon-fa-arrow-down">Export
+                   @click="exportProblems" icon="el-icon-fa-arrow-down">{{$t('m.Export')}}
         </el-button>
         <el-pagination
           class="page"
@@ -56,7 +56,7 @@
         </el-pagination>
       </div>
     </panel>
-    <panel title="Import QDUOJ Problems (beta)">
+    <panel :title="$t('m.Import_QDUOJ_Problems_beta')">
       <el-upload
         ref="QDU"
         action="/api/admin/import_problem/"
@@ -69,12 +69,12 @@
         :auto-upload="false"
         :on-success="uploadSucceeded"
         :on-error="uploadFailed">
-        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">Choose File</el-button>
-        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('QDU')">Upload</el-button>
+        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">{{$t('m.Choose_File')}}</el-button>
+        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('QDU')">{{$t('m.Upload')}}</el-button>
       </el-upload>
     </panel>
 
-    <panel title="Import FPS Problems (beta)">
+    <!-- <panel title="Import FPS Problems (beta)">
       <el-upload
         ref="FPS"
         action="/api/admin/import_fps/"
@@ -90,7 +90,7 @@
         <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">Choose File</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('FPS')">Upload</el-button>
       </el-upload>
-    </panel>
+    </panel> -->
   </div>
 </template>
 <script>
