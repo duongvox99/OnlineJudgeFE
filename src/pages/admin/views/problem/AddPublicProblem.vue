@@ -1,6 +1,21 @@
 <template>
   <div>
     <div class="header">
+      <el-select v-model="isPrivate" @change="onFilter()">
+        <el-option
+          label="Public"
+          :value="false">
+        </el-option> 
+        <el-option
+          label="Private"
+          :value="true">
+        </el-option>
+      </el-select>
+      <el-input
+        v-model="keyword"
+        placeholder="Keywords"
+        prefix-icon="el-icon-search">
+      </el-input>
       <el-select v-model="difficulty" @change="onFilter()">
         <el-option
           label="All"
@@ -17,21 +32,6 @@
         <el-option
           label="High"
           :value="'High'">
-        </el-option>
-      </el-select>
-      <el-input
-        v-model="keyword"
-        placeholder="Keywords"
-        prefix-icon="el-icon-search">
-      </el-input>
-      <el-select v-model="isPrivate" @change="onFilter()">
-        <el-option
-          label="Public"
-          :value="false">
-        </el-option> 
-        <el-option
-          label="Private"
-          :value="true">
         </el-option>
       </el-select>
     </div>
@@ -123,7 +123,6 @@
             display_id: value
           }
           api.addProblemFromPublic(data).then(() => {
-            console.log('hehe', data)
             if (!data.error) {
               this.$success('Successfully clone problems')
               this.$emit('on-change')
@@ -154,7 +153,10 @@
     display: flex;
 
     .el-select {
-      width: 100px;
+      width: 130px;
+      &:not(:first-child) {
+        width: 100px;
+      }
     }
   }
 </style>

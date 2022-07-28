@@ -4,12 +4,12 @@
       <template slot="header">
         <el-select v-if="!isContestProblem" v-model="isUseForContest" placeholder="Select" @change="filterContestChange()">
           <el-option
-            :label="$t('m.public')"
+            :label="$t('m.Public')"
             :value="false"
           >
           </el-option>
           <el-option
-            :label="$t('m.for_contest')"
+            :label="$t('m.For_contest')"
             :value="true"
           >
           </el-option>
@@ -17,7 +17,7 @@
         <el-input
           v-model="keyword"
           prefix-icon="el-icon-search"
-          placeholder="Keywords">
+          :placeholder="$t('m.Keywords')">
         </el-input>
       </template>
       <el-table
@@ -34,7 +34,7 @@
         </el-table-column>
         <el-table-column
           width="150"
-          label="Display ID">
+          :label="$t('m.Display_ID')">
           <template slot-scope="{row}">
             <span v-show="!row.isEditing">{{row._id}}</span>
             <el-input v-show="row.isEditing" v-model="row._id"
@@ -45,7 +45,7 @@
         </el-table-column>
         <el-table-column
           prop="title"
-          label="Title">
+          :label="$t('m.Title')">
           <template slot-scope="{row}">
             <span v-show="!row.isEditing">{{row.title}}</span>
             <el-input v-show="row.isEditing" v-model="row.title"
@@ -55,12 +55,12 @@
         </el-table-column>
         <el-table-column
           prop="created_by.username"
-          label="Author">
+          :label="$t('m.Author')">
         </el-table-column>
         <el-table-column
           width="200"
           prop="create_time"
-          label="Create Time">
+          :label="$t('m.Created_at')">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
@@ -68,7 +68,7 @@
         <el-table-column
           width="100"
           prop="visible"
-          label="Visible">
+          :label="$t('m.Visible')">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.visible"
                        active-text=""
@@ -79,15 +79,15 @@
         </el-table-column>
         <el-table-column
           fixed="right"
-          label="Operation"
+          :label="$t('m.Option')"
           width="250">
           <div slot-scope="scope">
-            <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-            <icon-btn v-if="contestId" name="Make Public" icon="clone"
+            <icon-btn :name="$t('m.Edit')" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
+            <icon-btn v-if="contestId" :name="$t('m.Make_Public')" icon="clone"
                       @click.native="makeContestProblemPublic(scope.row.id)"></icon-btn>
-            <icon-btn icon="download" name="Download TestCase"
+            <icon-btn icon="download" :name="$t('m.Download_TestCase')"
                       @click.native="downloadTestCase(scope.row.id)"></icon-btn>
-            <icon-btn icon="trash" name="Delete Problem"
+            <icon-btn icon="trash" :name="$t('m.Delete')"
                       @click.native="deleteProblem(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
@@ -117,8 +117,8 @@
                :visible.sync="InlineEditDialogVisible"
                @close-on-click-modal="false">
       <div>
-        <p>DisplayID: {{currentRow._id}}</p>
-        <p>Title: {{currentRow.title}}</p>
+        <p>{{$t('m.Display_ID')}}: {{currentRow._id}}</p>
+        <p>{{$t('m.Title')}}: {{currentRow.title}}</p>
       </div>
       <span slot="footer">
         <cancel @click.native="InlineEditDialogVisible = false; getProblemList(currentPage)"></cancel>
@@ -216,7 +216,7 @@
         })
       },
       deleteProblem (id) {
-        this.$confirm('Sure to delete this problem? The associated submissions will be deleted as well.', 'Delete Problem', {
+        this.$confirm(this.$i18n.t('m.Sure_to_delete_this_problem_The_associated_submissions_will_be_deleted_as_well'), this.$i18n.t('m.Confirm'), {
           type: 'warning'
         }).then(() => {
           let funcName = this.routeName === 'problem-list' ? 'deleteProblem' : 'deleteContestProblem'

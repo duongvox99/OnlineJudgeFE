@@ -11,10 +11,10 @@
         <table class="table-announcements" key="list">
           <tr>
             <th class="title">{{$t('m.Title')}}</th>
-            <th class="tag" v-if="isAdminRole">Visible</th>
-            <th class="last-update">Last update at</th>
-            <th class="create-at">Create at</th>
-            <th class="create-by">Create by</th>
+            <th class="tag" v-if="isAdminRole">{{$t('m.Visible')}}</th>
+            <th class="last-update">{{$t('m.Last_update_at')}}</th>
+            <th class="create-at">{{$t('m.Created_at')}}</th>
+            <th class="create-by">{{$t('m.Created_by')}}</th>
             <th v-if="isAdminRole"></th>
           </tr>
           <tr v-for="announcement in announcements" :key="announcement.title">
@@ -102,18 +102,18 @@
       },
       deleteAnnouncement (id) {
         this.$Modal.confirm({
-          content: 'Are you sure to delete this announcement',
+          content: this.$i18n.t('m.Delete_announcement_confirm'),
           onOk: () => {
             // still error here, not fix yet
             api.deleteAnnouncement(this.data.id, id).then(resp => {
               if (!resp.error) {
-                this.$success('Delete successfully')
+                this.$success(this.$i18n.t('m.Delete_successfully'))
                 this.setupAnnouncements()
               } else {
-                this.$error('Some thing went wrong')
+                this.$error(this.$i18n.t('m.Something_went_wrong'))
               }
             }).catch(err => {
-              this.$error('Some thing went wrong ', err)
+              this.$error(this.$i18n.t('m.Something_went_wrong') + ' ', err)
             })
           }
         })

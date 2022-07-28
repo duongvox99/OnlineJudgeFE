@@ -11,7 +11,7 @@
         </BreadcrumbItem>
       </Breadcrumb>
       <Button v-if="isAdminRole && !selectedClassroom" @click="openCreateModal()">
-        + New Classroom
+        + {{$t('m.New')}} {{$t('m.Classroom')}}
       </Button>
     </template>
     <div class="card-wrapper" 
@@ -113,18 +113,18 @@
       },
       onDeleteClassroom (id) {
         this.$Modal.confirm({
-          content: 'Are you sure to delete this classroom',
+          content: this.$i18n.t('m.Delete_classroom_confirm'),
           onOk: () => {
             // still error here, not fix yet
             api.deleteClassroom(id).then(resp => {
               if (!resp.error) {
-                this.$success('Delete successfully')
+                this.$success(this.$i18n.t('m.Delete_successfully'))
                 this.setupClassrooms()
               } else {
-                this.$error('Some thing went wrong')
+                this.$error(this.$i18n.t('m.Something_went_wrong'))
               }
             }).catch(err => {
-              this.$error('Some thing went wrong ', err)
+              this.$error(this.$i18n.t('m.Something_went_wrong') + ' ', err)
             })
           }
         })

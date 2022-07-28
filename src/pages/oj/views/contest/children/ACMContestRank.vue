@@ -74,7 +74,7 @@
             }
           },
           {
-            title: this.$i18n.t('m.User_User'),
+            title: this.$i18n.t('m.Users'),
             align: 'center',
             fixed: 'left',
             width: 150,

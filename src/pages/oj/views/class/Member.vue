@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="users-wrapper">
-      <h3>Teachers 
+      <h3>{{$t('m.Teachers')}} 
         <Button 
           v-if="isAdminRole"
           @click="addTeacher()">
-          + New teacher
+          + {{$t('m.New')}} {{$t('m.Teachers')}}
         </Button>
       </h3>
       <table class="table-user" key="list">
         <tr>
-          <th class="full-name">Full name</th>
-          <th class="username">Username</th>
+          <th class="full-name">{{$t('m.Full_name')}}</th>
+          <th class="username">{{$t('m.Username')}}</th>
           <th class="email">Email</th>
           <th v-if="isAdminRole"></th>
         </tr>
@@ -48,17 +48,17 @@
       </div>
     </div>
     <div class="users-wrapper">
-      <h3>Students
+      <h3>{{$t('m.Students')}}
         <Button 
           v-if="isAdminRole"
           @click="addStudent()">
-          + New student
+          + {{$t('m.New')}} {{$t('m.Students')}}
         </Button>
       </h3>
       <table class="table-user" key="list">
         <tr>
-          <th class="full-name">Full name</th>
-          <th class="username">Username</th>
+          <th class="full-name">{{$t('m.Full_name')}}</th>
+          <th class="username">{{$t('m.Username')}}</th>
           <th class="email">Email</th>
           <th v-if="isAdminRole"></th>
         </tr>
@@ -161,18 +161,18 @@
       },
       deleteMember (userId) {
         this.$Modal.confirm({
-          content: this.$t('m.Delete_member_confirm'),
+          content: this.$i18n.t('m.Delete_member_confirm'),
           onOk: () => {
             // still error here, not fix yet
             api.deleteMemberClassroom(this.data.id, userId).then(resp => {
               if (!resp.error) {
-                this.$success('Delete successfully')
+                this.$success(this.$i18n.t('m.Delete_successfully'))
                 this.handleMembers()
               } else {
-                this.$error('Some thing went wrong')
+                this.$error(this.$i18n.t('m.Something_went_wrong'))
               }
             }).catch(err => {
-              this.$error('Some thing went wrong ', err)
+              this.$error(this.$i18n.t('m.Something_went_wrong') + ' ', err)
             })
           }
         })
@@ -221,7 +221,7 @@
         .full-name {
           padding-left: 10px;
           text-align: left;
-          width: 40%;
+          width: 35%;
           
           &:not(.cell) {
             padding-left: 56px;
@@ -254,9 +254,11 @@
         }
         .username {
           text-align: left;
+          width: 25%;
         }
         .email {
           text-align: left;
+          width: 35%;
         } 
         .action {
           width: 50px;

@@ -177,7 +177,7 @@
           checked: true
         }
         api.updateACInfoCheckedStatus(data).then(res => {
-          this.$success('Succeeded')
+          this.$success(this.$i18n.t('m.Succeeded'))
           this.getACInfo()
         }).catch(() => {
         })

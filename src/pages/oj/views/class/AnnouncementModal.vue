@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="visibleModal" class="large" :width="1200" @on-cancel="closeModal()">
+  <Modal v-model="visibleModal" class="large" class-name="vertical-center-modal" :width="1200" @on-cancel="closeModal()">
     <div slot="header" class="modal-title">{{title}}</div>
     <div>
       <Form ref="formAnnouncement" :model="formAnnouncement" :rules="ruleAnnouncement">
@@ -121,7 +121,7 @@
         return !this.editedAnnouncementId ? this.$i18n.t('m.Create') : this.$i18n.t('m.Update')
       },
       title () {
-        return this.btnLabel + ' ' + this.$i18n.t('m.Classroom')
+        return this.btnLabel + ' ' + this.$i18n.t('m.Announcements')
       }
     },
     watch: {

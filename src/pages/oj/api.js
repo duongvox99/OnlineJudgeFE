@@ -339,6 +339,20 @@ export default {
   },
   unMappingContest (classroomId, contestId) {
     return ajax(`classrooms/${classroomId}/contests/${contestId}`, 'delete')
+  },
+  getBookmarks (keyword) {
+    if (!keyword) return ajax('bookmarks/', 'get')
+    return ajax(`bookmarks/?search_label_text=${keyword}`, 'get')
+  },
+  bookmarkProblem (data) {
+    return ajax('bookmarks/', 'post', {
+      data
+    })
+  },
+  unBookmarkProblem (data) {
+    return ajax('bookmarks/un_bookmark/', 'post', {
+      data
+    })
   }
 }
 

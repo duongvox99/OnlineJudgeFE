@@ -64,6 +64,7 @@
           </Button>
           <Dropdown-menu slot="list">
             <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
+            <Dropdown-item name="/bookmarks">{{$t('m.Bookmarks')}}</Dropdown-item>
             <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
             <Dropdown-item name="/setting/profile">{{$t('m.Settings')}}</Dropdown-item>
             <Dropdown-item v-if="isAdminRole" name="/admin">{{$t('m.Management')}}</Dropdown-item>
@@ -72,7 +73,7 @@
         </Dropdown>
       </template>
     </Menu>
-    <Modal v-model="modalVisible" :width="400">
+    <Modal v-model="modalVisible" class-name="vertical-center-modal"  :width="400">
       <div slot="header" class="modal-title">{{$t('m.Welcome_to')}} {{website.website_name_shortcut}}</div>
       <component :is="modalStatus.mode" v-if="modalVisible"></component>
       <div slot="footer" style="display: none"></div>

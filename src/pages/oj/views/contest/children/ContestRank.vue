@@ -28,7 +28,6 @@
         if (this.contestRuleType === null) {
           return 'NullComponent'
         }
-        console.log('asd', this.contestRuleType === 'ACM')
         return this.contestRuleType === 'ACM' ? 'ACMContestRank' : 'OIContestRank'
       }
     },

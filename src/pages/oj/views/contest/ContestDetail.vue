@@ -153,7 +153,7 @@
         }
         this.btnLoading = true
         api.checkContestPassword(this.contestID, this.contestPassword).then((res) => {
-          this.$success('Succeeded')
+          this.$success(this.$i18n.t('m.Succeeded'))
           this.$store.commit(types.CONTEST_ACCESS, {access: true})
           this.btnLoading = false
         }, (res) => {

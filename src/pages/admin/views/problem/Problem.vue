@@ -125,7 +125,7 @@
           <el-form-item v-for="(sample, index) in problem.samples" :key="'sample'+index">
             <Accordion :title="'Sample' + (index + 1)">
               <el-button type="warning" size="small" icon="el-icon-delete" slot="header" @click="deleteSample(index)">
-                Delete
+                {{$t('m.Delete')}}
               </el-button>
               <el-row :gutter="20">
                 <el-col :span="12">
@@ -159,6 +159,16 @@
         <el-form-item style="margin-top: 20px" :label="$t('m.Hint')">
           <Simditor v-model="problem.hint" placeholder=""></Simditor>
         </el-form-item>
+        <el-form-item :label="$t('m.Is_Show_Solution_After_Submit')">
+          <el-switch
+            v-model="problem.is_can_see_solution_after_success_submission"
+            active-text=""
+            inactive-text="">
+          </el-switch>
+        </el-form-item>
+        <el-form-item v-if="problem.is_can_see_solution_after_success_submission" style="margin-top: 20px" :label="$t('m.Solution')">
+          <Simditor v-model="problem.solution" placeholder=""></Simditor>
+        </el-form-item>
         <el-form-item :label="$t('m.Code_Template')">
           <el-row>
             <el-col :span="24" v-for="(v, k) in template" :key="'template'+k">
@@ -189,7 +199,7 @@
                 :show-file-list="true"
                 :on-success="uploadSucceeded"
                 :on-error="uploadFailed">
-                <el-button size="small" type="primary" icon="el-icon-fa-upload">Choose File</el-button>
+                <el-button size="small" type="primary" icon="el-icon-fa-upload">{{$t('m.Choose_File')}}</el-button>
               </el-upload>
             </el-form-item>
           </el-col>
@@ -244,7 +254,7 @@
         <el-form-item :label="$t('m.Source')">
           <el-input :placeholder="$t('m.Source')" v-model="problem.source"></el-input>
         </el-form-item>
-        <save @click.native="submit()">Save</save>
+        <save @click.native="submit()">{{$t('m.Save')}}</save>
       </el-form>
     </Panel>
   </div>
@@ -331,6 +341,8 @@
           test_case_score: [],
           rule_type: 'ACM',
           hint: '',
+          is_can_see_solution_after_success_submission: false,
+          solution: '',
           source: '',
           io_mode: {'io_mode': 'Standard IO', 'input': 'input.txt', 'output': 'output.txt'}
         }
@@ -354,7 +366,7 @@
           this.title = this.$i18n.t('m.Edit_Problem')
           let funcName = {'edit-problem': 'getProblem', 'edit-contest-problem': 'getContestProblem'}[this.routeName]
           api[funcName](this.$route.params.problemId).then(problemRes => {
-            let data = problemRes.data.data.data
+            let data = problemRes.data.data
             if (!data.spj_code) {
               data.spj_code = ''
             }

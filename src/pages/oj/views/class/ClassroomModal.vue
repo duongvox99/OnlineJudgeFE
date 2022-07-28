@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="visibleModal" :width="1200" @on-cancel="closeModal()">
+  <Modal v-model="visibleModal" :width="1200" class-name="vertical-center-modal" @on-cancel="closeModal()">
     <div slot="header" class="modal-title">{{title}}</div>
     <div>
       <Form ref="formClassroom" :model="formClassroom" :rules="ruleClassroom">

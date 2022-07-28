@@ -28,7 +28,7 @@
             <Input v-model="query.keyword"
                    @on-enter="filterByKeyword"
                    @on-click="filterByKeyword"
-                   placeholder="keyword"
+                   :placeholder="$t('m.Keyword')"
                    icon="ios-search-strong"/>
           </li>
           <li>
@@ -46,8 +46,13 @@
              disabled-hover></Table>
     </Panel>
     <Pagination
-      :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true"></Pagination>
-
+      :total="total"
+      :page-size.sync="query.limit"
+      @on-change="pushRouter"
+      @on-page-size-change="pushRouter"
+      :current.sync="query.page"
+      :show-sizer="true">
+      </Pagination>
     </Col>
 
     <Col :span="5">
@@ -171,7 +176,7 @@
           difficulty: '',
           tag: '',
           page: 1,
-          limit: 10
+          limit: 15
         }
       }
     },
@@ -189,7 +194,7 @@
         if (this.query.page < 1) {
           this.query.page = 1
         }
-        this.query.limit = parseInt(query.limit) || 10
+        this.query.limit = parseInt(query.limit) || 15
         if (!simulate) {
           this.getTagList()
         }

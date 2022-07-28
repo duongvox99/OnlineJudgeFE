@@ -1,8 +1,5 @@
 <template>
   <div class="view">
-    <Panel :title="$t('m.Judge_Server_Token')">
-      <code>{{ token }}</code>
-    </Panel>
     <Panel :title="$t('m.Judge_Server_Info')">
       <el-table
         :data="servers"
