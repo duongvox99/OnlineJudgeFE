@@ -106,7 +106,7 @@
           })
         }
         ACProblems.sort()
-        this.problems = [...new Set(ACProblems)]
+        this.problems = ACProblems
       },
       goProblem (problemID) {
         this.$router.push({name: 'problem-details', params: {problemID: problemID}})

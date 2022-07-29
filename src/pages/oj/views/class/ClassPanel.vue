@@ -11,7 +11,7 @@
         <div class="action-wrapper">
           <template v-if="activeTab === '1'">
             <Button v-if="isDetailAnnouncementMode" type="ghost" icon="ios-undo" @click="goBackAnnouncement()">{{$t('m.Back')}}</Button>
-            <Button v-else type="info" @click="updateAnnouncement()">{{$t('m.Refresh')}}</Button>
+            <Button v-else type="info" @click="updateAnnouncement()" :loading="btnLoading">{{$t('m.Refresh')}}</Button>
           </template>
           <Button 
             v-if="isShowBtnAdd"

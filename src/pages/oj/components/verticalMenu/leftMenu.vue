@@ -103,11 +103,8 @@ export default {
       this.$refs.side1.toggleCollapse()
       this.$emit('isCollapsed', this.isCollapsed)
     },
-    getActiveMenu: {
-      set () {
-        return this.activeMenu = '/' + this.$route.path.split('/')[1]
-      },
-      get () {} 
+    getActiveMenu () {
+      this.activeMenu = '/' + this.$route.path.split('/')[1]
     }
   },
   computed: {
