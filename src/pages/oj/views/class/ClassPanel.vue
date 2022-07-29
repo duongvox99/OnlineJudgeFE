@@ -28,7 +28,7 @@
           @detailModeChange="handleDetailModeChange($event)"
           @onEdit="openEditAnnouncement($event)"></Announcement>
         <Contest v-else-if="activeTab === '2'" :data="activeClassroom"></Contest>
-        <Grade v-else-if="activeTab === '3'" :data="activeClassroom"></Grade>
+        <!-- <Grade :data="activeClassroom"></Grade> -->
         <Member v-else :data="activeClassroom"></Member>
       </div>
     </div>
@@ -71,8 +71,8 @@
           {title: this.$t('m.Home'), to: '/', tab: '0'},
           {title: this.$t('m.Announcements'), to: '/', tab: '1'},
           {title: this.$t('m.Contest'), to: '/', tab: '2'},
-          {title: this.$t('m.Grades'), to: '/', tab: '3'},
-          {title: this.$t('m.Members'), to: '/', tab: '4'}
+          // {title: this.$t('m.Grades'), to: '/', tab: '3'},
+          {title: this.$t('m.Members'), to: '/', tab: '3'}
         ],
         activeTab: '0',
         activeModal: null,
