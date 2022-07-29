@@ -77,9 +77,11 @@
             <Input v-model="formProfile.major"/>
           </Form-item>
           <FormItem :label="$t('m.Language')">
-            <Select v-model="formProfile.language">
-              <Option v-for="lang in languages" :key="lang.value" :value="lang.value">{{lang.label}}</Option>
-            </Select>
+            <template v-if="languages">
+              <Select v-model="formProfile.language">
+                <Option v-for="lang in languages" :key="lang.value" :value="lang.value">{{lang.label}}</Option>
+              </Select>
+            </template>
           </FormItem>
           <Form-item>
             <Button type="primary" @click="updateProfile" :loading="loadingSaveBtn">{{$t('m.Save_All')}}</Button>
@@ -98,8 +100,8 @@
           </Form-item>
           <FormItem :label="$t('m.Is_Receive_Daily_Email')">
             <Select v-model="formProfile.is_receive_daily_suggestion_mail">
-              <Option :value="true">{{$t('m.Receive')}}</Option>
-              <Option :value="false">{{$t('m.Reject')}}</Option>
+              <Option value="true">{{$t('m.Receive')}}</Option>
+              <Option value="false">{{$t('m.Reject')}}</Option>
             </Select>
           </FormItem>
         </Col>
@@ -140,7 +142,7 @@
           school: '',
           github: '',
           language: '',
-          is_receive_daily_suggestion_mail: false
+          is_receive_daily_suggestion_mail: ''
         }
       }
     },

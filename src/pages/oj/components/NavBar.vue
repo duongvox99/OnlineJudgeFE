@@ -92,7 +92,9 @@
       register
     },
     props: {
-      isSideMenuCollapse: Boolean
+      isSideMenuCollapse: {
+        type: Boolean
+      }
     },
     mounted () {
       this.getProfile()
@@ -116,8 +118,11 @@
     computed: {
       ...mapGetters(['website', 'modalStatus', 'user', 'isAuthenticated', 'isAdminRole']),
       // 跟随路由变化
-      activeMenu () {
-        return '/' + this.$route.path.split('/')[1]
+      activeMenu: {
+        get () {
+          return '/' + this.$route.path.split('/')[1]
+        },
+        set (value) {}
       },
       modalVisible: {
         get () {
