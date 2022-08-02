@@ -315,5 +315,6 @@ export const m = {
   Bookmarks_List: 'Bookmark List',
   Un_bookmark_successfully: 'Remove bookmark problem successfully',
   Bookmark_successfully: 'Bookmark problem successfully',
-  Solution: 'Solution'
+  Solution: 'Solution',
+  Wrong_password: 'Login fail, please try again'
 }

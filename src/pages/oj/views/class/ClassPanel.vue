@@ -11,7 +11,7 @@
         <div class="action-wrapper">
           <template v-if="activeTab === '1'">
             <Button v-if="isDetailAnnouncementMode" type="ghost" icon="ios-undo" @click="goBackAnnouncement()">{{$t('m.Back')}}</Button>
-            <Button v-else type="info" @click="updateAnnouncement()" :loading="btnLoading">{{$t('m.Refresh')}}</Button>
+            <Button v-else type="info" @click="updateAnnouncement()">{{$t('m.Refresh')}}</Button>
           </template>
           <Button 
             v-if="isShowBtnAdd"
@@ -28,7 +28,7 @@
           @detailModeChange="handleDetailModeChange($event)"
           @onEdit="openEditAnnouncement($event)"></Announcement>
         <Contest v-else-if="activeTab === '2'" :data="activeClassroom"></Contest>
-        <!-- <Grade :data="activeClassroom"></Grade> -->
+        <Grade v-else-if="activeTab === '3'" :data="activeClassroom"></Grade>
         <Member v-else :data="activeClassroom"></Member>
       </div>
     </div>
@@ -71,8 +71,8 @@
           {title: this.$t('m.Home'), to: '/', tab: '0'},
           {title: this.$t('m.Announcements'), to: '/', tab: '1'},
           {title: this.$t('m.Contest'), to: '/', tab: '2'},
-          // {title: this.$t('m.Grades'), to: '/', tab: '3'},
-          {title: this.$t('m.Members'), to: '/', tab: '3'}
+          {title: this.$t('m.Grades'), to: '/', tab: '3'},
+          {title: this.$t('m.Members'), to: '/', tab: '4'}
         ],
         activeTab: '0',
         activeModal: null,

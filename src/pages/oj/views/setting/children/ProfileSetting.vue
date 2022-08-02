@@ -77,9 +77,11 @@
             <Input v-model="formProfile.major"/>
           </Form-item>
           <FormItem :label="$t('m.Language')">
-            <Select v-model="formProfile.language">
-              <Option v-for="lang in languages" :key="lang.value" :value="lang.value">{{lang.label}}</Option>
-            </Select>
+            <template v-if="languages">
+              <Select v-model="formProfile.language">
+                <Option v-for="lang in languages" :key="lang.value" :value="lang.value">{{lang.label}}</Option>
+              </Select>
+            </template>
           </FormItem>
           <Form-item>
             <Button type="primary" @click="updateProfile" :loading="loadingSaveBtn">{{$t('m.Save_All')}}</Button>
@@ -97,9 +99,9 @@
             <Input v-model="formProfile.github"/>
           </Form-item>
           <FormItem :label="$t('m.Is_Receive_Daily_Email')">
-            <Select v-model="formProfile.is_receive_daily_suggestion_mail">
-              <Option :value="true">{{$t('m.Receive')}}</Option>
-              <Option :value="false">{{$t('m.Reject')}}</Option>
+            <Select v-model="is_receive_daily_suggestion_mail">
+              <Option value="receive">{{$t('m.Receive')}}</Option>
+              <Option value="reject">{{$t('m.Reject')}}</Option>
             </Select>
           </FormItem>
         </Col>
@@ -140,8 +142,9 @@
           school: '',
           github: '',
           language: '',
-          is_receive_daily_suggestion_mail: false
-        }
+          is_receive_daily_suggestion_mail: ''
+        },
+        is_receive_daily_suggestion_mail: ''
       }
     },
     mounted () {
@@ -149,6 +152,9 @@
       Object.keys(this.formProfile).forEach(element => {
         if (profile[element] !== undefined) {
           this.formProfile[element] = profile[element]
+          if (element === 'is_receive_daily_suggestion_mail') {
+            this.is_receive_daily_suggestion_mail = profile[element] ? 'receive' : 'reject'
+          }
         }
       })
     },
@@ -234,7 +240,7 @@
       },
       updateProfile () {
         this.loadingSaveBtn = true
-        let updateData = utils.filterEmptyValue(Object.assign({}, this.formProfile))
+        let updateData = utils.filterEmptyValue(Object.assign({}, {...this.formProfile, is_receive_daily_suggestion_mail: this.is_receive_daily_suggestion_mail === 'receive'}))
         api.updateProfile(updateData).then(res => {
           this.$success('Success')
           this.$store.commit(types.CHANGE_PROFILE, {profile: res.data.data})

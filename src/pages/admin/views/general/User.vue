@@ -41,7 +41,7 @@
 
         <el-table-column prop="real_name" :label="$t('m.Real_Name')"></el-table-column>
 
-        <el-table-column prop="email" :label="Email"></el-table-column>
+        <el-table-column prop="email" :label="$t('m.Email')"></el-table-column>
 
         <el-table-column prop="admin_type" :label="$t('m.User_Type')">
           <template slot-scope="scope">
@@ -308,7 +308,6 @@
         this.showUserDialog = true
         api.getUser(id).then(res => {
           this.user = res.data.data
-          this.user.password = ''
           this.user.real_tfa = this.user.two_factor_auth
         })
       },

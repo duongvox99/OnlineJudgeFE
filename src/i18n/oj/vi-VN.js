@@ -316,5 +316,6 @@ export const m = {
   Bookmarks_List: 'Danh sách lưu trữ bài toán',
   Un_bookmark_successfully: 'Bỏ lưu bài toán thành công',
   Bookmark_successfully: 'Lưu bài toán thành công',
-  Solution: 'Lời giải'
+  Solution: 'Lời giải',
+  Wrong_password: 'Đăng nhập không thành công, hãy thử lại'
 }
