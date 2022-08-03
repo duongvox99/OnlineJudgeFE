@@ -92,7 +92,9 @@
       register
     },
     props: {
-      isSideMenuCollapse: Boolean
+      isSideMenuCollapse: {
+        type: Boolean
+      }
     },
     mounted () {
       this.getProfile()

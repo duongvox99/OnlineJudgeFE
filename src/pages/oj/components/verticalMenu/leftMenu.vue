@@ -109,8 +109,11 @@ export default {
   },
   computed: {
     ...mapGetters(['isAuthenticated']),
-    activeMenu () {
-      return '/' + this.$route.path.split('/')[1]
+    activeMenu: {
+      get () {
+        return '/' + this.$route.path.split('/')[1]
+      },
+      set () {}
     },
     rotateIcon () {
       return [

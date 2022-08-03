@@ -84,9 +84,13 @@
           }
           api.login(formData).then(res => {
             this.btnLoginLoading = false
-            this.changeModalStatus({visible: false})
-            this.getProfile()
-            this.$success(this.$i18n.t('m.Welcome_back'))
+            if (res.data.data === 'Succeeded') {
+              this.changeModalStatus({visible: false})
+              this.getProfile()
+              this.$success(this.$i18n.t('m.Welcome_back'))
+            } else {
+              this.$error(this.$i18n.t('m.Wrong_password'))
+            }
           }, _ => {
             this.btnLoginLoading = false
           })
