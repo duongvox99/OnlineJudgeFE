@@ -49,7 +49,7 @@
     },
     data () {
       return {
-        limit: 10,
+        limit: 5,
         total: 10,
         btnLoading: false,
         announcements: [],

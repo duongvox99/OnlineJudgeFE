@@ -90,7 +90,7 @@
   const limit = 15
 
   export default {
-    name: 'contest-list',
+    name: 'ContestList',
     components: {
       Pagination
     },
